@@ -3,12 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Map from './Map';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import CollegeAPI from "../api/CollegeAPI";
 import SchoolItem from "./SchoolItem";
+import SearchInput from "./SearchInput";
 
 
 const SplitLayout = () => {
@@ -16,7 +13,7 @@ const SplitLayout = () => {
   const [schoolResults, setSchoolResults] = useState();
   const [targetSchool, setTargetSchool] = useState();
 
-  const handleKeyPress = (e) => {
+  const handleKeyUp = (e) => {
     if (e.keyCode === 13) {
       setSearchTerm(e.target.value);
     }
@@ -43,16 +40,7 @@ const SplitLayout = () => {
       <Row>
         <Col>
           <div className="search-pane">
-            <InputGroup className="mb-3 search-input" onKeyUp={handleKeyPress}>
-              <InputGroup.Text id="basic-addon1">
-                <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Find a school"
-                aria-label="search"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
+            <SearchInput keyUpHandler={handleKeyUp} />
             
             <br />
 

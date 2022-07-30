@@ -5,6 +5,14 @@ import Card from 'react-bootstrap/Card';
 const SchoolItem = (props) => {
   const { name, city, url, state, zip, showOnMap } = props;
 
+  function fixURL(url) {
+    if (url.includes("http:") || url.includes("https:")) {
+      return url;
+    } 
+
+    return "//" + url;
+  }
+
   return (
     <Card>
       <Card.Body>
@@ -14,7 +22,7 @@ const SchoolItem = (props) => {
             {city}, {state} {zip}
           </div>
           <div>
-            <a href={url}>{url}</a>
+            <a href={fixURL(url)} target="_blank" rel="noopener noreferrer">{url}</a>
           </div>
         </Card.Text>
         <div className="d-grid gap-2">

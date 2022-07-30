@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,17 +7,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import CollegeAPI from "../api/CollegeAPI";
+import SchoolItem from "./SchoolItem";
 
 
-const SplitLayout = (props) => {
+const SplitLayout = () => {
   const [searchTerm, setSearchTerm] = useState();
+  const [schoolResults, setSchoolResults] = useState();
+  const [targetSchool, setTargetSchool] = useState();
 
   const handleKeyPress = (e) => {
-    console.log('Get here???', e);
     if (e.keyCode === 13) {
       setSearchTerm(e.target.value);
     }
   }
+
+  const showOnMap = (name, long, lat) => {
+    setTargetSchool(name);
+  }
+
+  useEffect(() => {
+    async function search() {
+      if (searchTerm) {
+        const data = await CollegeAPI.searchSchools(searchTerm);
+  
+        setSchoolResults(data.results);
+      }
+    }
+
+    search();
+  }, [searchTerm]);
 
   return (
     <Container fluid>
@@ -34,10 +53,27 @@ const SplitLayout = (props) => {
                 aria-describedby="basic-addon1"
               />
             </InputGroup>
+            
+            <br />
+
+            {schoolResults && schoolResults.map(school => {
+              console.log(school);
+              return (
+                <SchoolItem 
+                  key={school.id}
+                  name={school["school.name"]}
+                  city={school["school.city"]}
+                  url={school["school.school_url"]}
+                  state={school["school.state"]}
+                  zip={school["school.zip"]}
+                  showOnMap={showOnMap}
+                />
+              );
+            })}
           </div>
         </Col>
         <Col>
-          <Map schoolName={searchTerm} />
+          <Map targetName={targetSchool} />
         </Col>
       </Row>
     </Container>

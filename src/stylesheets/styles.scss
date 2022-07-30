@@ -5,9 +5,22 @@
 
 .search-pane {
   padding-top: 25px;
+  overflow: scroll;
+  height: 100vh;
 
   .search-input {
-    margin: auto;
-    width: 75%
+    margin: 1rem;
+    width: 94%
   }
+
+  .card {
+    margin: 1rem;
+    text-align: left;
+  }
+}
+
+.map {
+  width: 100%;
+  height: 99vh;
+  overflow: auto;
 }

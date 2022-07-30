@@ -22,7 +22,7 @@ const SplitLayout = () => {
     }
   }
 
-  const showOnMap = (name, long, lat) => {
+  const showOnMap = (name) => {
     setTargetSchool(name);
   }
 
@@ -57,7 +57,6 @@ const SplitLayout = () => {
             <br />
 
             {schoolResults && schoolResults.map(school => {
-              console.log(school);
               return (
                 <SchoolItem 
                   key={school.id}

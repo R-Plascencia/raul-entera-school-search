@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const SchoolItem = (props) => {
-  const { name, city, url, state, zip, lat, long, showOnMap } = props;
+  const { name, city, url, state, zip, showOnMap } = props;
 
   return (
     <Card>
@@ -18,7 +18,7 @@ const SchoolItem = (props) => {
           </div>
         </Card.Text>
         <div className="d-grid gap-2">
-          <Button variant="success" onClick={()=>showOnMap(name, lat, long)}>See on Map</Button>
+          <Button variant="success" onClick={()=>showOnMap(name)}>See on Map</Button>
         </div>
       </Card.Body>
     </Card>

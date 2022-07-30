@@ -1,17 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './stylesheets/styles.scss'
-import SplitPane from './components/SplitLayout';
-import Map from './components/Map';
-import SearchPane from './components/SearchPane';
+import SplitLayout from './components/SplitLayout';
 
 function App() {
   return (
     <div className="App">
-      <SplitPane
-        left={<SearchPane />}
-        right={<Map />}
-       />
+      <SplitLayout/>
     </div>
   );
 }

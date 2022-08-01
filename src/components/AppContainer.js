@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
-const SplitLayout = () => {
+const AppContainer = () => {
   const [searchTerm, setSearchTerm] = useState();
   const [schoolResults, setSchoolResults] = useState();
   const [targetSchool, setTargetSchool] = useState({});
@@ -52,7 +52,7 @@ const SplitLayout = () => {
             <br />
             {isLoading && <FontAwesomeIcon icon={faSpinner} size="2x" spin={true} />}
 
-            {!isLoading && schoolResults.length === 0 && <span>No results found.</span>}
+            {!isLoading && schoolResults?.length === 0 && <span>No results found.</span>}
 
             {!isLoading && schoolResults && schoolResults.map(school => {
               return (
@@ -77,4 +77,4 @@ const SplitLayout = () => {
   );
 }
 
-export default SplitLayout;
+export default AppContainer;

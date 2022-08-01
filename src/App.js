@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './stylesheets/styles.scss'
-import SplitLayout from './components/SplitLayout';
+import AppContainer from './components/AppContainer';
 
 function App() {
   return (
     <div className="App">
-      <SplitLayout/>
+      <AppContainer/>
     </div>
   );
 }

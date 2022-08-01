@@ -19,7 +19,7 @@ const Map = (props) => {
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade"
       src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyBhogM_XW7c77ZcrP4_-ntnevDfMaELNpQ
-        &q=${queryString()}&zoom=15`}>
+        &q=${queryString()}&zoom=16`}>
     </iframe>
   )
 }

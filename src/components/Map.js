@@ -1,7 +1,15 @@
 import React from "react";
 
 const Map = (props) => {
-  const targetName = props.targetName;
+  const { name, city } = props.targetData;
+
+  function queryString() {
+    if (name && city) {
+      return `${encodeURIComponent(name)}+${city}`;
+    }
+
+    return "Los+Angeles";
+  }
 
   return (
     <iframe
@@ -11,7 +19,7 @@ const Map = (props) => {
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade"
       src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyBhogM_XW7c77ZcrP4_-ntnevDfMaELNpQ
-        &q=${encodeURIComponent(targetName || 'Los+Angeles')}&zoom=15`}>
+        &q=${queryString()}&zoom=15`}>
     </iframe>
   )
 }

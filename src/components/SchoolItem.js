@@ -26,7 +26,7 @@ const SchoolItem = (props) => {
           </div>
         </Card.Text>
         <div className="d-grid gap-2">
-          <Button variant="success" onClick={()=>showOnMap(name)}>See on Map</Button>
+          <Button variant="success" onClick={()=>showOnMap(name, city)}>See on Map</Button>
         </div>
       </Card.Body>
     </Card>

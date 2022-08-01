@@ -6,12 +6,15 @@ import Map from './Map';
 import CollegeAPI from "../api/CollegeAPI";
 import SchoolItem from "./SchoolItem";
 import SearchInput from "./SearchInput";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
 const SplitLayout = () => {
   const [searchTerm, setSearchTerm] = useState();
   const [schoolResults, setSchoolResults] = useState();
-  const [targetSchool, setTargetSchool] = useState();
+  const [targetSchool, setTargetSchool] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleKeyUp = (e) => {
     if (e.keyCode === 13) {
@@ -19,16 +22,20 @@ const SplitLayout = () => {
     }
   }
 
-  const showOnMap = (name) => {
-    setTargetSchool(name);
+  const showOnMap = (name, city) => {
+    setTargetSchool({name, city});
   }
 
   useEffect(() => {
     async function search() {
       if (searchTerm) {
+        setIsLoading(true);
+
         const data = await CollegeAPI.searchSchools(searchTerm);
   
         setSchoolResults(data.results);
+
+        setIsLoading(false);
       }
     }
 
@@ -43,8 +50,9 @@ const SplitLayout = () => {
             <SearchInput keyUpHandler={handleKeyUp} />
             
             <br />
+            { isLoading && <FontAwesomeIcon icon={faSpinner} size="2x" spin="true" />}
 
-            {schoolResults && schoolResults.map(school => {
+            {!isLoading && schoolResults && schoolResults.map(school => {
               return (
                 <SchoolItem 
                   key={school.id}
@@ -60,7 +68,7 @@ const SplitLayout = () => {
           </div>
         </Col>
         <Col>
-          <Map targetName={targetSchool} />
+          <Map targetData={targetSchool} />
         </Col>
       </Row>
     </Container>

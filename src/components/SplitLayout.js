@@ -18,7 +18,7 @@ const SplitLayout = () => {
 
   const handleKeyUp = (e) => {
     if (e.keyCode === 13) {
-      setSearchTerm(e.target.value);
+      setSearchTerm(encodeURIComponent(e.target.value));
     }
   }
 
@@ -50,7 +50,9 @@ const SplitLayout = () => {
             <SearchInput keyUpHandler={handleKeyUp} />
             
             <br />
-            { isLoading && <FontAwesomeIcon icon={faSpinner} size="2x" spin="true" />}
+            {isLoading && <FontAwesomeIcon icon={faSpinner} size="2x" spin={true} />}
+
+            {!isLoading && schoolResults.length === 0 && <span>No results found.</span>}
 
             {!isLoading && schoolResults && schoolResults.map(school => {
               return (
